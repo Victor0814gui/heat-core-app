@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native-windows";
 import { FONTS } from "../../../../shared/theme";
 
 
@@ -12,13 +12,13 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: FONTS.Poppins.poppinsMedium,
     fontSize: 16,
-    color: "#1E1E1E",
+    color: "#333333",
     fontWeight: "600",
   },
   button:{
-    width: 200,
-    height: 41,
-    backgroundColor: "#25DA67",
+    paddingHorizontal: 21,
+    height: 42,
+    backgroundColor: "#4DD0E1",
     borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   contentDescription:{
-    fontFamily: FONTS.Roboto_Slab.ExtraLight,
+    fontFamily: FONTS.Roboto.BlackItalic,
     marginTop: 8,
     color: "#999999",
     maxWidth: 500,

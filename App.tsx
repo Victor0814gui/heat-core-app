@@ -6,13 +6,7 @@ import { Router } from './src/shared/routes';
 
 export default function App(){
   return(
-    <NavigationContainer
-      theme={{
-        colors:{
-          background: "#000000"
-        }
-      }}
-    >
+    <NavigationContainer>
       <Router/>
     </NavigationContainer>
   )
