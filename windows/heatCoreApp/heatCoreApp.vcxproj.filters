@@ -41,6 +41,7 @@
   <ItemGroup>
     <None Include="PropertySheet.props" />
     <None Include="app.config.json" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Black.ttf" />
@@ -82,6 +83,22 @@
     <Font Include="Assets\fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
     <Font Include="Assets\fonts\Poppins\Poppins-Thin.ttf" />
     <Font Include="Assets\fonts\Poppins\Poppins-ThinItalic.ttf" />
+    <Font Include="Assets\fonts\icons\AntDesign.ttf" />
+    <Font Include="Assets\fonts\icons\Entypo.ttf" />
+    <Font Include="Assets\fonts\icons\EvilIcons.ttf" />
+    <Font Include="Assets\fonts\icons\Feather.ttf" />
+    <Font Include="Assets\fonts\icons\FontAwesome.ttf" />
+    <Font Include="Assets\fonts\icons\FontAwesome5_Brands.ttf" />
+    <Font Include="Assets\fonts\icons\FontAwesome5_Regular.ttf" />
+    <Font Include="Assets\fonts\icons\FontAwesome5_Solid.ttf" />
+    <Font Include="Assets\fonts\icons\Fontisto.ttf" />
+    <Font Include="Assets\fonts\icons\Foundation.ttf" />
+    <Font Include="Assets\fonts\icons\Ionicons.ttf" />
+    <Font Include="Assets\fonts\icons\MaterialCommunityIcons.ttf" />
+    <Font Include="Assets\fonts\icons\MaterialIcons.ttf" />
+    <Font Include="Assets\fonts\icons\Octicons.ttf" />
+    <Font Include="Assets\fonts\icons\SimpleLineIcons.ttf" />
+    <Font Include="Assets\fonts\icons\Zocial.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\fonts\Roboto\LICENSE.txt" />

@@ -24,6 +24,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 12,
   },
+  buttonActive:{
+    backgroundColor: "#21b1c4",
+  },
   content:{
   },
   contentText:{
