@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d4497063-196f-4d1e-a673-32f8422e6a39"
+    Name="13c54c3d-cc2d-4cc8-b480-3bcee59d3c0d"
     Publisher="CN=agcoi"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="d4497063-196f-4d1e-a673-32f8422e6a39" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="13c54c3d-cc2d-4cc8-b480-3bcee59d3c0d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>heatCoreApp</DisplayName>
@@ -37,7 +37,7 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="heatCoreApp"
-        BackgroundColor="#36393F">
+        BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

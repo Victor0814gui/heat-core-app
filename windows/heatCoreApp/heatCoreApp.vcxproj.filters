@@ -1,11 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="App.idl" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="AutolinkedNativeModules.g.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="App.h" />
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="AutolinkedNativeModules.g.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -40,68 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
-    <None Include="app.config.json" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Thin.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Italic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Thin.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Black.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Bold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Italic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Light.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Medium.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Regular.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Thin.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\icons\AntDesign.ttf" />
-    <Font Include="Assets\fonts\icons\Entypo.ttf" />
-    <Font Include="Assets\fonts\icons\EvilIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Feather.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Brands.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Regular.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Solid.ttf" />
-    <Font Include="Assets\fonts\icons\Fontisto.ttf" />
-    <Font Include="Assets\fonts\icons\Foundation.ttf" />
-    <Font Include="Assets\fonts\icons\Ionicons.ttf" />
-    <Font Include="Assets\fonts\icons\MaterialCommunityIcons.ttf" />
-    <Font Include="Assets\fonts\icons\MaterialIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Octicons.ttf" />
-    <Font Include="Assets\fonts\icons\SimpleLineIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Zocial.ttf" />
+    <Text Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\fonts\Roboto\LICENSE.txt" />
-    <Text Include="Assets\fonts\Poppins\OFL.txt" />
+    <Page Include="MainPage.xaml" />
   </ItemGroup>
 </Project>

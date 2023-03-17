@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This project was created with react-native-windows 0.0.0-canary.537 -->
+<!-- This project was created with react-native-windows 0.70.14 -->
 <Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(SolutionDir)\ExperimentalFeatures.props" Condition="Exists('$(SolutionDir)\ExperimentalFeatures.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{8495f4a5-43ce-45c8-9c3d-58734d1b51df}</ProjectGuid>
-    <ProjectName>CalculatorCoreAppNuGet</ProjectName>
-    <RootNamespace>CalculatorCoreAppNuGet</RootNamespace>
+    <ProjectGuid>{4c364586-6a79-43b0-9991-cd70a9f1a3d5}</ProjectGuid>
+    <ProjectName>heatCoreApp</ProjectName>
+    <RootNamespace>heatCoreApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <UseRNCoreApp>true</UseRNCoreApp>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-  </PropertyGroup>
-  <PropertyGroup Label="NuGet">
-    <ResolveNuGetPackages>false</ResolveNuGetPackages>
   </PropertyGroup>
   <PropertyGroup Label="ReactNativeWindowsProps">
     <ReactNativeWindowsDir Condition="'$(ReactNativeWindowsDir)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), 'node_modules\react-native-windows\package.json'))\node_modules\react-native-windows\</ReactNativeWindowsDir>
-    <!--
-      This sample doesn't use native modules, so we can save some time in the build by not compiling the Cxx source files.
-      If your project uses native modules, remove the line setting BuildMSRNCxx to false.
-    -->
-    <BuildMSRNCxx>false</BuildMSRNCxx>
   </PropertyGroup>
   <Import Project="$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.WindowsSdk.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -91,11 +81,7 @@
       <WarningLevel>Level4</WarningLevel>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
@@ -106,13 +92,23 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MainPage.h">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="AutolinkedNativeModules.g.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -129,89 +125,46 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="MainPage.cpp">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="AutolinkedNativeModules.g.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="App.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CppWinRT" Version="2.0.220608.4" />
+    <Midl Include="App.idl">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="MainPage.idl">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config.json" Condition="'$(Configuration)'=='Debug'">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="app.config.release.json" Condition="'$(Configuration)'=='Release'">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="packages.config" />
     <None Include="PropertySheet.props" />
+    <Text Include="readme.txt">
+      <DeploymentContent>false</DeploymentContent>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Assets\fonts\icons\AntDesign.ttf" />
-    <Font Include="Assets\fonts\icons\Entypo.ttf" />
-    <Font Include="Assets\fonts\icons\EvilIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Feather.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Brands.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Regular.ttf" />
-    <Font Include="Assets\fonts\icons\FontAwesome5_Solid.ttf" />
-    <Font Include="Assets\fonts\icons\Fontisto.ttf" />
-    <Font Include="Assets\fonts\icons\Foundation.ttf" />
-    <Font Include="Assets\fonts\icons\Ionicons.ttf" />
-    <Font Include="Assets\fonts\icons\MaterialCommunityIcons.ttf" />
-    <Font Include="Assets\fonts\icons\MaterialIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Octicons.ttf" />
-    <Font Include="Assets\fonts\icons\SimpleLineIcons.ttf" />
-    <Font Include="Assets\fonts\icons\Zocial.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Black.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Bold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Italic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Light.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Medium.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Regular.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Thin.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Italic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Thin.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Thin.ttf" />
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\fonts\Poppins\OFL.txt" />
-    <Text Include="Assets\fonts\Roboto\LICENSE.txt" />
+    <PackageReference Include="Microsoft.Windows.CppWinRT" Version="2.0.211028.7" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ReactNativeWindowsTargets">
     <Import Project="$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets" Condition="Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets')" />
-    <Import Project="..\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets" Condition="Exists('..\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets')" />
   </ImportGroup>
   <Target Name="EnsureReactNativeWindowsTargets" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -219,11 +172,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props'))" />
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets'))" />
-  </Target>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets'))" />
   </Target>
 </Project>
