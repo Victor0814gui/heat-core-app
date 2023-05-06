@@ -5,6 +5,7 @@ import { COLORS } from '../theme';
 import { ServersChannels } from '../components/servers-channels';
 import { Chat } from '../components/chat';
 import { PeoplesProfile } from '../components/peoples-profile';
+import { Header } from '../components/header';
 
 
 export function HemeScreen() {
@@ -12,8 +13,14 @@ export function HemeScreen() {
     <View style={styles.container}>
       <Navbar />
       <ServersChannels />
-      <Chat />
-      <PeoplesProfile />
+      <View style={{ flex: 1 }}>
+        <Header />
+        <View style={{ flexDirection: "row", flex: 1 }}>
+          <Chat />
+          <PeoplesProfile />
+        </View>
+      </View>
+
     </View>
   );
 }

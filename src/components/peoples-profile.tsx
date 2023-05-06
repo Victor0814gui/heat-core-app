@@ -9,7 +9,7 @@ export function PeoplesProfile() {
       <FlatList
         data={new Array(30).fill({ e: 1 })}
         renderItem={({ item, index }) => (
-          <View style={styles.messageContainer}>
+          <View key={index} style={styles.messageContainer}>
             <Image
               style={styles.imageAvatar}
               source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}

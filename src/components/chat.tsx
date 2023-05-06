@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { FONTS } from '../theme';
 
-
 export function Chat() {
   return (
     <View style={styles.containerWrapper}>
@@ -23,19 +22,30 @@ export function Chat() {
                 source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
               />
               <View style={styles.messageContent}>
-                <Text style={styles.messageContentNickname}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-                <Text style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+                <Text selectable style={styles.messageContentNickname}>Victor Guilherme <Text style={styles.hourText}>Hoje às 8:40</Text></Text>
+                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
               </View>
             </View>
           )}
+          keyExtractor={(_, index) => `${index}`}
         />
       </View>
       <View style={styles.inputContainer}>
+        <Image source={require("../assets/add.svg")} style={styles.icon} />
         <TextInput
           onFocus={(e) => console.log("focus")}
           onBlur={(e) => console.log("blur")}
           style={styles.input}
+          placeholder='Conversar #💬  geral'
         />
+        <Image source={require("../assets/figurines.svg")} style={styles.icon} />
+        <Image source={require("../assets/gif.svg")} style={styles.icon} />
+        <Image source={require("../assets/gift.svg")} style={styles.icon} />
+        <Text style={styles.icon}>🤔</Text>
       </View>
     </View>
   );
@@ -61,22 +71,49 @@ const styles = StyleSheet.create({
     height: imageAvatarSize,
     width: imageAvatarSize,
     borderRadius: imageAvatarSize / 2,
-    marginRight: 12,
+    marginRight: 16,
+    marginLeft: 6,
   },
   messageContent: {
     justifyContent: "space-between",
   },
   messageContentNickname: {
     fontFamily: FONTS.Roboto.Medium,
+    fontSize: 16,
+    color: "#f2f2f2",
+
+  },
+  hourText: {
+    fontSize: 12,
+    color: "#7f8584",
   },
   messageContentText: {
-    fontFamily: FONTS.Roboto.Regular,
+    fontFamily: FONTS.Roboto.Medium,
+    fontSize: 14,
+    color: "#b5b7b9",
+    // fontWeight: "500",
+    marginTop: 4,
   },
   inputContainer: {
     maxHeight: 41,
     flex: 1,
+    flexDirection: "row",
+    backgroundColor: "#383a40",
+    alignItems: "center",
+    borderRadius: 7,
+    paddingLeft: 12,
   },
   input: {
-    borderColor: "#383a40"
+    borderColor: "#383a40",
+    flex: 1,
+    fontFamily: FONTS.Roboto.Medium,
+    backgroundColor: "#383a40",
+  },
+  icon: {
+    color: "#b5b7b9",
+    height: 26,
+    width: 26,
+    fontSize: 19,
+    marginHorizontal: 7,
   },
 })

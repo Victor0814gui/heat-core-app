@@ -173,6 +173,7 @@
   <ItemGroup>
     <None Include="PropertySheet.props" />
     <None Include="app.config.json" />
+    <None Include="discordclone_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Black.ttf" />
