@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { COLORS } from '../theme';
-import { TouchableHighlight } from 'react-native-windows';
+import { COLORS } from '../../theme';
+import { Pressable, TouchableHighlight } from 'react-native-windows';
+import { Circle } from './components/circle';
 
 export const salasDoDiscord = [
   {
@@ -214,14 +215,11 @@ export const rooms = [
   }
 ]
 
-
 export function Navbar({ navigation, ...rest }: any) {
 
 
   const renderItem = ({ _, index }: any) => (
-    <TouchableHighlight onPress={() => navigation.navigate("Home", { itemId: index })}>
-      <View style={styles.serverItem} />
-    </TouchableHighlight>
+    <Circle onPress={() => navigation.navigate("Home", { itemId: index })} />
   )
 
   return (
@@ -229,9 +227,7 @@ export function Navbar({ navigation, ...rest }: any) {
       <FlatList
         data={salasDoDiscord}
         ListHeaderComponent={
-          <TouchableHighlight onPress={() => navigation.navigate("PrivateConversations")}>
-            <View style={styles.serverItem} />
-          </TouchableHighlight>
+          <Circle onPress={() => navigation.navigate("PrivateConversations")} />
         }
         renderItem={renderItem}
         contentContainerStyle={styles.list}

@@ -7,6 +7,7 @@ import { Chat } from '../components/chat';
 import { PeoplesProfile } from '../components/peoples-profile';
 import { Header } from '../components/header';
 import { SelectRoomContextProvider } from '../contexts/select-room';
+import { ProfileModal } from '../components/profile';
 
 
 export function HomeScreen({ navigation, route }: any) {

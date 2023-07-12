@@ -15,8 +15,8 @@ export const FONTS = {
     Regular: "Roboto-Regular.ttf#Roboto",
   },
   Poppins: {
-    poppinsMedium: "Poppins-Medium.ttf#Poppins",
-    poppinsLigth: "Poppins-Light.ttf#Poppins",
+    Medium: "Poppins-Medium.ttf#Poppins",
+    Ligth: "Poppins-Light.ttf#Poppins",
   }
 }
 

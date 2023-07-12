@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { SplashScreen } from './screens/splash-screen';
 import { Navbar } from './components/navbar';
 import { PrivateConversationsScreen } from './screens/private-conversations-screen';
+import { Modal } from './components/modal';
 
 const MyTheme = {
   ...DefaultTheme,

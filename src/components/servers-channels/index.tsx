@@ -1,47 +1,33 @@
 
 
 
-import React, { memo, useRef, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../theme';
+import React, { ReactNode, memo, useRef, useState } from 'react';
+import { View, Text, Image, PressableProps, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { COLORS, FONTS } from '../../theme';
 import { Pressable, useWindowDimensions } from 'react-native-windows';
-import { salasDoDiscord } from './navbar';
-import { useSelectRoomContextProvider } from '../contexts/select-room';
+import { salasDoDiscord } from '../navbar';
+import { useSelectRoomContextProvider } from '../../contexts/select-room';
 
-const ListHeaderComponent = () => {
-  const { width } = useWindowDimensions();
-  return (
-    <View style={[styles.header, { width }]}>
-      <Image
-        source={require("../assets/5463a80eb8187cf8796d3db0a2e01bbc.webp")}
-        style={[styles.headerImage,]}
-      />
-    </View>
-  )
-}
+import SettingIconSvg from "../../assets/settings.svg"
+import MicrophoneIconSvg from "../../assets/microphone.svg"
+import HeadphoneIconSvg from "../../assets/headphone.svg"
+import ArrowSvg from "../../assets/arrow.svg"
+
+import { ProfileModal } from '../profile';
+import { ServerItem } from './server-item';
+import { ListHeaderComponent } from './server-list-header';
+import { ButtonWrapper } from './button-wrapper';
 
 type ServerItemProps = {
   item: any;
   index: number;
 }
 
-
-const ServerItem = memo(({ item, index }: ServerItemProps) => {
-  const { setId } = useSelectRoomContextProvider();
-
-  return (
-    <TouchableOpacity onPress={() => setId(index)} key={index} style={styles.channelContent}>
-      <View style={styles.channelsItemDot} />
-      <Image style={styles.channelContentIcon} source={require("../assets/channel.svg")} />
-      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.channelContentText}>{item}</Text>
-    </TouchableOpacity>
-  )
-})
-
 export function ServersChannels({ id }: { id: number }) {
   const [isScrolled, setIsScrolled] = useState(true)
+  const [isOpen, setIsOpen] = useState(true)
   const scrollRef = useRef<FlatList>(null);
-
+  const modalRef = useRef(null);
 
   const roomData = salasDoDiscord[id];
 
@@ -67,21 +53,53 @@ export function ServersChannels({ id }: { id: number }) {
 
   return (
     <View style={styles.container}>
+      <ProfileModal
+        isOpen={isOpen}
+        //@ts-ignore
+        target={modalRef.current}
+        onDismiss={() => {
+          setIsOpen(false);
+          console.log("onDimiss")
+        }}
+      />
       <View style={[
         styles.headerTop,
         isScrolled && { backgroundColor: COLORS.grey_180, },
       ]}>
         <Text style={styles.headerText}>{roomData.nome}</Text>
-        <Image source={require("../assets/arrow.svg")} />
+        <Image source={ArrowSvg} />
       </View>
       <FlatList
         onScroll={(e) => onScroll(e.nativeEvent.contentOffset.y)}
         ref={scrollRef}
-        data={new Array(10).fill({ e: 1 })}
+        data={new Array(3).fill({ e: 1 })}
         ListHeaderComponent={ListHeaderComponent}
         renderItem={renderItem}
-        contentContainerStyle={styles.list}
       />
+      <View style={styles.footer}>
+        <View ref={modalRef} style={{ marginRight: "auto" }}>
+          <ButtonWrapper onPress={() => setIsOpen(true)}>
+            <Image
+              style={styles.imageAvatar}
+              source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
+            />
+            <View style={{ marginLeft: 7, paddingRight: 12, }}>
+              <Text numberOfLines={1} style={styles.name}>Guilherme</Text>
+              <Text style={styles.nickname}>Disponivel</Text>
+            </View>
+          </ButtonWrapper>
+        </View>
+
+        <ButtonWrapper>
+          <Image source={MicrophoneIconSvg} style={styles.icon} />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <Image source={HeadphoneIconSvg} style={styles.icon} />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <Image source={SettingIconSvg} style={styles.icon} />
+        </ButtonWrapper>
+      </View>
     </View>
   );
 }
@@ -94,12 +112,6 @@ const styles = StyleSheet.create({
     maxWidth: 270,
     minWidth: 200,
     backgroundColor: COLORS.grey_180,
-  },
-  list: {
-  },
-  header: {
-    position: "relative",
-    marginBottom: 12,
   },
   headerTop: {
     position: "absolute",
@@ -114,12 +126,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 16,
     fontFamily: FONTS.Roboto.Bold,
-  },
-  headerImage: {
-    flex: 1,
-    width: 270,
-    minWidth: 200,
-    maxHeight: 200,
   },
   channelsItem: {
     marginVertical: 4,
@@ -157,5 +163,29 @@ const styles = StyleSheet.create({
   channelContentText: {
     fontSize: 14,
     fontFamily: FONTS.Roboto.Regular,
+  },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 4,
+    paddingHorizontal: 7,
+  },
+  imageAvatar: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+  },
+  name: {
+    fontSize: 14,
+    fontFamily: FONTS.Poppins.Medium,
+  },
+  nickname: {
+    fontSize: 12,
+    fontFamily: FONTS.Poppins.Medium,
+    color: "#b9b9b9"
+  },
+  icon: {
+    height: 22,
+    width: 22,
   },
 })

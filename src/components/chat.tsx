@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     padding: 12,
+    position: "relative",
+    zIndex: 99,
   },
   container: {
     flex: 1,
