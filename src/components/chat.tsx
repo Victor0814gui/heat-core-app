@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   View,
   Text,
@@ -8,30 +8,46 @@ import {
   Image,
 } from 'react-native';
 import { FONTS } from '../theme';
+import { rooms } from './navbar';
+import { useSelectRoomContextProvider } from '../contexts/select-room';
+type MessageProps = {
+  item: any;
+  index: number;
+}
+
+const Message = memo(({ item, index }: MessageProps) => (
+  <View style={styles.messageContainer}>
+    <Image
+      style={styles.imageAvatar}
+      source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
+    />
+    <View style={styles.messageContent}>
+      <Text selectable style={styles.messageContentNickname}>{item.author}<Text style={styles.hourText}>Hoje às 8:40</Text></Text>
+      <Text selectable style={styles.messageContentText}>{item.content}</Text>
+      {/* <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+      <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+      <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
+      <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text> */}
+    </View>
+  </View>
+))
 
 export function Chat() {
+
+  const { id } = useSelectRoomContextProvider();
+  const roomData = rooms[id];
+
+  const renderItem = (props: MessageProps) => <Message {...props} />
+  const keyExtractor = (_: any, index: number) => `${index}`;
+
+
   return (
     <View style={styles.containerWrapper}>
       <View style={styles.container}>
         <FlatList
-          data={new Array(30).fill({ e: 1 })}
-          renderItem={({ item, index }) => (
-            <View style={styles.messageContainer}>
-              <Image
-                style={styles.imageAvatar}
-                source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
-              />
-              <View style={styles.messageContent}>
-                <Text selectable style={styles.messageContentNickname}>Victor Guilherme <Text style={styles.hourText}>Hoje às 8:40</Text></Text>
-                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-                <Text selectable style={styles.messageContentText}>Criar novas mensagens requerem contextos mais complexos de filtros</Text>
-              </View>
-            </View>
-          )}
-          keyExtractor={(_, index) => `${index}`}
+          data={roomData.ansewrs}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
         />
       </View>
       <View style={styles.inputContainer}>

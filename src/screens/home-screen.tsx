@@ -6,21 +6,23 @@ import { ServersChannels } from '../components/servers-channels';
 import { Chat } from '../components/chat';
 import { PeoplesProfile } from '../components/peoples-profile';
 import { Header } from '../components/header';
+import { SelectRoomContextProvider } from '../contexts/select-room';
 
 
-export function HemeScreen() {
+export function HomeScreen({ navigation, route }: any) {
+  const id = route.params.itemId;
   return (
     <View style={styles.container}>
-      <Navbar />
-      <ServersChannels />
-      <View style={{ flex: 1 }}>
-        <Header />
-        <View style={{ flexDirection: "row", flex: 1 }}>
-          <Chat />
-          <PeoplesProfile />
+      <SelectRoomContextProvider>
+        <ServersChannels id={id} />
+        <View style={{ flex: 1 }}>
+          <Header id={id} />
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <Chat />
+            <PeoplesProfile />
+          </View>
         </View>
-      </View>
-
+      </SelectRoomContextProvider>
     </View>
   );
 }

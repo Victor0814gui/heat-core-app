@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
 import { FONTS } from '../theme';
+import { salasDoDiscord } from './navbar';
 
 
-export function Header() {
+export function Header({ id }: { id: number }) {
+  const roomData = salasDoDiscord[id];
+
   return (
     <View style={styles.container}>
       <Image style={{ marginHorizontal: 8, height: 24, width: 24, }} source={require('../assets/channel.svg')} />
       <Text style={styles.channelTitle}>topics</Text>
+      <Text numberOfLines={1} style={styles.channelDescription}>{roomData.descricao}</Text>
       <View style={styles.chnnelActions}>
         <Image style={styles.icon} source={require('../assets/notification.svg')} />
         <Image style={styles.icon} source={require('../assets/peoples.svg')} />
@@ -40,6 +44,10 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
   },
   channelTitle: {
+    fontFamily: FONTS.Roboto.Black,
+    fontSize: 15,
+  },
+  channelDescription: {
     fontFamily: FONTS.Roboto.Black,
     fontSize: 15,
   },

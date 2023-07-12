@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This project was created with react-native-windows 0.0.0-canary.537 -->
+<!-- This project was created with react-native-windows 0.70.20 -->
 <Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LottieGen.MsBuild.7.0.5\build\native\LottieGen.MsBuild.props" Condition="Exists('..\packages\LottieGen.MsBuild.7.0.5\build\native\LottieGen.MsBuild.props')" />
   <Import Project="$(SolutionDir)\ExperimentalFeatures.props" Condition="Exists('$(SolutionDir)\ExperimentalFeatures.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{8495f4a5-43ce-45c8-9c3d-58734d1b51df}</ProjectGuid>
-    <ProjectName>discordclone</ProjectName>
-    <RootNamespace>CalculatorCoreAppNuGet</RootNamespace>
+    <ProjectGuid>{13cb5623-5a27-43b5-8b66-57a5148f93fb}</ProjectGuid>
+    <ProjectName>heatCoreApp</ProjectName>
+    <RootNamespace>heatCoreApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <UseRNCoreApp>true</UseRNCoreApp>
-  </PropertyGroup>
-  <PropertyGroup Label="NuGet">
-    <ResolveNuGetPackages>false</ResolveNuGetPackages>
+     <IntDir>$(MSBuildProjectDirectory)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <GeneratedFilesDir>$(IntDir)Generated Files\</GeneratedFilesDir>
   </PropertyGroup>
   <PropertyGroup Label="ReactNativeWindowsProps">
     <ReactNativeWindowsDir Condition="'$(ReactNativeWindowsDir)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), 'node_modules\react-native-windows\package.json'))\node_modules\react-native-windows\</ReactNativeWindowsDir>
-    <!--
-      This sample doesn't use native modules, so we can save some time in the build by not compiling the Cxx source files.
-      If your project uses native modules, remove the line setting BuildMSRNCxx to false.
-    -->
-    <BuildMSRNCxx>false</BuildMSRNCxx>
   </PropertyGroup>
   <Import Project="$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.WindowsSdk.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -80,17 +75,7 @@
   <ImportGroup Label="ReactNativeWindowsPropertySheets">
     <Import Project="$(ReactNativeWindowsDir)\PropertySheets\external\Microsoft.ReactNative.Uwp.CppApp.props" Condition="Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props')" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros">
-    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>B8E86C5B0ECC032712DBCBE9471AFD94E3AE8492</PackageCertificateThumbprint>
-    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -99,11 +84,7 @@
       <WarningLevel>Level4</WarningLevel>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
@@ -114,13 +95,23 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MainPage.h">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="AutolinkedNativeModules.g.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -128,125 +119,98 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\LargeTile.scale-100.png" />
-    <Image Include="Assets\LargeTile.scale-125.png" />
-    <Image Include="Assets\LargeTile.scale-150.png" />
-    <Image Include="Assets\LargeTile.scale-200.png" />
-    <Image Include="Assets\LargeTile.scale-400.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
-    <Image Include="Assets\SmallTile.scale-100.png" />
-    <Image Include="Assets\SmallTile.scale-125.png" />
-    <Image Include="Assets\SmallTile.scale-150.png" />
-    <Image Include="Assets\SmallTile.scale-200.png" />
-    <Image Include="Assets\SmallTile.scale-400.png" />
-    <Image Include="Assets\SplashScreen.scale-100.png" />
-    <Image Include="Assets\SplashScreen.scale-125.png" />
-    <Image Include="Assets\SplashScreen.scale-150.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
-    <Image Include="Assets\SplashScreen.scale-400.png" />
-    <Image Include="Assets\Square150x150Logo.scale-100.png" />
-    <Image Include="Assets\Square150x150Logo.scale-125.png" />
-    <Image Include="Assets\Square150x150Logo.scale-150.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />
-    <Image Include="Assets\Square150x150Logo.scale-400.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-    <Image Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
-    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
-    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
-    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
-    <Image Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
-    <Image Include="Assets\Square44x44Logo.scale-100.png" />
-    <Image Include="Assets\Square44x44Logo.scale-125.png" />
-    <Image Include="Assets\Square44x44Logo.scale-150.png" />
     <Image Include="Assets\Square44x44Logo.scale-200.png" />
-    <Image Include="Assets\Square44x44Logo.scale-400.png" />
-    <Image Include="Assets\Square44x44Logo.targetsize-16.png" />
-    <Image Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Image Include="Assets\Square44x44Logo.targetsize-256.png" />
-    <Image Include="Assets\Square44x44Logo.targetsize-32.png" />
-    <Image Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <Image Include="Assets\StoreLogo.scale-100.png" />
-    <Image Include="Assets\StoreLogo.scale-125.png" />
-    <Image Include="Assets\StoreLogo.scale-150.png" />
-    <Image Include="Assets\StoreLogo.scale-200.png" />
-    <Image Include="Assets\StoreLogo.scale-400.png" />
-    <Image Include="Assets\Wide310x150Logo.scale-100.png" />
-    <Image Include="Assets\Wide310x150Logo.scale-125.png" />
-    <Image Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Image Include="Assets\StoreLogo.png" />
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Image Include="Assets\Wide310x150Logo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="MainPage.cpp">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="AutolinkedNativeModules.g.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="App.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CppWinRT" Version="2.0.220608.4" />
+    <Midl Include="App.idl">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="MainPage.idl">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config.json" Condition="'$(Configuration)'=='Debug'">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="app.config.release.json" Condition="'$(Configuration)'=='Release'">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="discordclone_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="PropertySheet.props" />
+    <Text Include="..\..\src\assets\fonts\Poppins\OFL.txt" />
+    <Text Include="..\..\src\assets\fonts\Roboto\LICENSE.txt" />
+    <Text Include="readme.txt">
+      <DeploymentContent>false</DeploymentContent>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Assets\fonts\Poppins\Poppins-Black.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Bold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Italic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Light.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Medium.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Regular.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-Thin.ttf" />
-    <Font Include="Assets\fonts\Poppins\Poppins-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BlackItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-BoldItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Italic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-LightItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-MediumItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-Thin.ttf" />
-    <Font Include="Assets\fonts\Roboto\Roboto-ThinItalic.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Black.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Bold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-ExtraLight.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Light.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Medium.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Regular.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-SemiBold.ttf" />
-    <Font Include="Assets\fonts\Roboto_Slab\static\RobotoSlab-Thin.ttf" />
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\fonts\Poppins\OFL.txt" />
-    <Text Include="Assets\fonts\Roboto\LICENSE.txt" />
+    <PackageReference Include="Microsoft.Windows.CppWinRT" Version="2.0.211028.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <LottieAnimation Include="..\..\src\assets\animations\Animation-New-Message.json" Name="Animation-New-Message" />
+    <!-- <LottieAnimation Include="..\..\src\assets\animations\Empty-Room.json" Name="Empty-Room" /> -->
+    <LottieAnimation Include="..\..\src\assets\animations\Hand-Holding-Emerald.json" Name="Hand-Holding-Emerald" />
+    <LottieAnimation Include="..\..\src\assets\animations\Hello-Friend.json" Name="Hello-Friend" />
+    <LottieAnimation Include="..\..\src\assets\animations\Search.json" Name="Search" />
+    <LottieAnimation Include="..\..\src\assets\animations\Splash.json" Name="Splash" />
+    <LottieAnimation Include="..\..\src\assets\animations\Switch.json" Name="Switch" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Black.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Bold.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-ExtraBold.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-ExtraLight.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Italic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Light.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Medium.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Regular.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-SemiBold.ttf" />
+    <Font Include="..\..\src\assets\fonts\Poppins\Poppins-Thin.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Black.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Bold.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Italic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Light.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-LightItalic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Medium.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Regular.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-Thin.ttf" />
+    <Font Include="..\..\src\assets\fonts\Roboto\Roboto-ThinItalic.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <PropertyGroup Label="LottieReactNativeProps">
+    <LottieReactNativeDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), 'node_modules\lottie-react-native\package.json'))\node_modules\lottie-react-native</LottieReactNativeDir>
+  </PropertyGroup>
+  <ImportGroup Label="LottieReactNativeTargets">
+    <Import Project="$(LottieReactNativeDir)\src\windows\cppwinrt\PropertySheets\LottieGen.Auto.targets" />
+  </ImportGroup>
   <ImportGroup Label="ReactNativeWindowsTargets">
     <Import Project="$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets" Condition="Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets')" />
+    <Import Project="..\packages\Microsoft.UI.Xaml.2.7.0\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.7.0\build\native\Microsoft.UI.Xaml.targets')" />
   </ImportGroup>
   <Target Name="EnsureReactNativeWindowsTargets" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -254,5 +218,12 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props'))" />
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.targets'))" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\LottieGen.MsBuild.7.0.5\build\native\LottieGen.MsBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LottieGen.MsBuild.7.0.5\build\native\LottieGen.MsBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.UI.Xaml.2.7.0\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.UI.Xaml.2.7.0\build\native\Microsoft.UI.Xaml.targets'))" />
   </Target>
 </Project>

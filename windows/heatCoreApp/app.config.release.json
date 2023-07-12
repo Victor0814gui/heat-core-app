@@ -1,8 +1,0 @@
-{
-  "componentName": "heatCoreApp",
-  "jsBundleFile": "index.windows", // release mode
-  "useWebDebugger": false,
-  "useDirectDebugger": false,
-  "useDeveloperSupport": false,
-  "useFastRefresh": false
-}

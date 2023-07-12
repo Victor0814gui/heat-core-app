@@ -1,10 +1,12 @@
 
 
 
-import React, { useRef, useState } from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import React, { memo, useRef, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { COLORS, FONTS } from '../theme';
-import { useWindowDimensions } from 'react-native-windows';
+import { Pressable, useWindowDimensions } from 'react-native-windows';
+import { salasDoDiscord } from './navbar';
+import { useSelectRoomContextProvider } from '../contexts/select-room';
 
 const ListHeaderComponent = () => {
   const { width } = useWindowDimensions();
@@ -18,13 +20,36 @@ const ListHeaderComponent = () => {
   )
 }
 
-export function ServersChannels() {
+type ServerItemProps = {
+  item: any;
+  index: number;
+}
+
+
+const ServerItem = memo(({ item, index }: ServerItemProps) => {
+  const { setId } = useSelectRoomContextProvider();
+
+  return (
+    <TouchableOpacity onPress={() => setId(index)} key={index} style={styles.channelContent}>
+      <View style={styles.channelsItemDot} />
+      <Image style={styles.channelContentIcon} source={require("../assets/channel.svg")} />
+      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.channelContentText}>{item}</Text>
+    </TouchableOpacity>
+  )
+})
+
+export function ServersChannels({ id }: { id: number }) {
   const [isScrolled, setIsScrolled] = useState(true)
   const scrollRef = useRef<FlatList>(null);
+
+
+  const roomData = salasDoDiscord[id];
 
   const onScroll = (e: number) => {
     setIsScrolled(e > 120);
   }
+
+  const renderItemServer = (props: ServerItemProps) => <ServerItem {...props} />
 
   const renderItem = () => (
     <View style={styles.channelsItem}>
@@ -32,13 +57,10 @@ export function ServersChannels() {
         <Text style={styles.channelsItemText}>╭──[🚀] NEXT LEVEL WEEK</Text>
       </View>
       <View style={styles.channelsItemContent}>
-        {new Array(10).fill({ e: 1 }).map((e, index) => (
-          <View key={index} style={styles.channelContent}>
-            <View style={styles.channelsItemDot} />
-            <Image style={styles.channelContentIcon} source={require("../assets/channel.svg")} />
-            <Text style={styles.channelContentText}>regras {index}</Text>
-          </View>
-        ))}
+        <FlatList
+          data={roomData.salas}
+          renderItem={renderItemServer}
+        />
       </View>
     </View>
   )
@@ -49,7 +71,7 @@ export function ServersChannels() {
         styles.headerTop,
         isScrolled && { backgroundColor: COLORS.grey_180, },
       ]}>
-        <Text style={styles.headerText}>Rocketseat</Text>
+        <Text style={styles.headerText}>{roomData.nome}</Text>
         <Image source={require("../assets/arrow.svg")} />
       </View>
       <FlatList
