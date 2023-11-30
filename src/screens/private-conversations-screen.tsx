@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Button, StyleSheet } from 'react-native';
 import { COLORS } from '../theme';
 
 import AnimatedLottieView from 'lottie-react-native';
 import { ANIMATIONS } from '../utils';
 import { SelectRoomContextProvider } from '../contexts/select-room';
 import { ServersChannels } from '../components/servers-channels';
-import { Header } from '../components/header';
+import { pickDirectory } from "react-native-document-picker";
 
 export function PrivateConversationsScreen({ navigation }: any) {
-
+  const onPress = async () => {
+    try {
+      const response = await pickDirectory();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -17,6 +24,7 @@ export function PrivateConversationsScreen({ navigation }: any) {
         <ServersChannels id={0} />
         <View style={{ flex: 1 }}>
           {/* <Header id={0} /> */}
+          <Button title="abrir arquivos" onPress={onPress} />
           <View style={styles.content}>
             <AnimatedLottieView
               source={ANIMATIONS.Search}

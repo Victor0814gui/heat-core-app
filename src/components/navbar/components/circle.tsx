@@ -43,7 +43,8 @@ export function Circle({ ...rest }) {
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     >
-      <Animated.View
+      <View style={styles.channelsItemDot} />
+      <Animated.Image
         //@ts-ignore
         onMouseEnter={onHoverIn}
         onMouseLeave={onHoverOut}
@@ -54,26 +55,34 @@ export function Circle({ ...rest }) {
             transform: [{ translateY: pressedAnim }]
           }
         ]}
-      >
-      </Animated.View>
+        source={{
+          uri: "https://cdn.discordapp.com/icons/567636850513018880/494d7b094cb03c141f239b6cf9717e8e.webp?size=96"
+        }}
+      />
     </Pressable>
   );
 }
 
+const channelsItemDotSize = 9;
+const serverItemSize = 50;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    maxWidth: 70,
-    backgroundColor: COLORS.grey_130,
-  },
   list: {
     alignItems: "center",
   },
   serverItem: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    marginVertical: 4,
+    height: serverItemSize,
+    width: serverItemSize,
+    borderRadius: serverItemSize / 2,
     backgroundColor: COLORS.grey_300,
-  }
+    alignSelf: "center"
+  },
+  channelsItemDot: {
+    height: channelsItemDotSize,
+    width: channelsItemDotSize / 2,
+    borderTopEndRadius: channelsItemDotSize / 2,
+    borderBottomEndRadius: channelsItemDotSize / 2,
+    backgroundColor: COLORS.white,
+    marginRight: 12,
+    top: (serverItemSize + channelsItemDotSize + channelsItemDotSize) / 2
+  },
 })

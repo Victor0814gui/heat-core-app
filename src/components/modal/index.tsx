@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import {
   View,
   StyleSheet,
@@ -7,14 +8,24 @@ import { Flyout } from 'react-native-windows';
 
 
 
-export function Modal({ props }: any) {
+export function Modal() {
   return (
     <Flyout
-      {...props}
-      placement="full"
-      isLightDismissEnabled={true}
+      isOpen={true}
+      onDismiss={() => {
+      }}
+      placement="bottom-edge-aligned-left"
     >
       <View style={styles.containerWrapper}>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
+        <Text>Convidar</Text>
       </View>
     </Flyout>
   );
@@ -29,6 +40,7 @@ const styles = StyleSheet.create({
     padding: 12,
     height: 330,
     width: 440,
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "red",
+    position: "absolute",
   },
 })

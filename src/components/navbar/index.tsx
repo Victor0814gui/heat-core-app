@@ -98,6 +98,35 @@ export const salasDoDiscord = [
   }
 ];
 
+const singleChanel = {
+  nome: "Sala de Jogos",
+  descricao: "Converse sobre jogos e organize partidas",
+  membros: 100,
+  online: 50,
+  salas: [
+    "Desenvolvimento Web",
+    "Inteligência Artificial",
+    "Aprendizado de Máquina",
+    "Ciência de Dados",
+    "Programação Orientada a Objetos",
+    "Desenvolvimento de Jogos",
+    "Segurança da Informação",
+    "Computação em Nuvem",
+    "Desenvolvimento de Aplicativos Mobile",
+    "Programação Funcional",
+    "Desenvolvimento de Aplicativos Desktop",
+    "Programação em Linguagem de Montagem",
+    "Programação de Sistemas Embarcados",
+    "Desenvolvimento de Software de Banco de Dados",
+    "Desenvolvimento de Interfaces de Usuário (UI/UX)",
+    "Programação de Redes e Protocolos",
+    "Desenvolvimento de Aplicações Web em Tempo Real",
+    "Programação Paralela e Concorrente",
+    "Desenvolvimento de Chatbots e Assistentes Virtuais",
+    "Programação de Dispositivos Móveis (Android, iOS)",
+  ]
+};
+
 export const ansewrs = [
   {
     content: "Você já ouviu falar sobre a Teoria das Cordas?",
@@ -225,10 +254,11 @@ export function Navbar({ navigation, ...rest }: any) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={salasDoDiscord}
+        data={new Array(16).fill(singleChanel)}
         ListHeaderComponent={
           <Circle onPress={() => navigation.navigate("PrivateConversations")} />
         }
+        showsVerticalScrollIndicator={false}
         renderItem={renderItem}
         contentContainerStyle={styles.list}
       />
@@ -243,7 +273,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.grey_130,
   },
   list: {
-    alignItems: "center",
+    // alignItems: "center",
   },
   serverItem: {
     height: 50,

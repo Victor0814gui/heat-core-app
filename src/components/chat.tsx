@@ -10,6 +10,7 @@ import {
 import { FONTS } from '../theme';
 import { rooms } from './navbar';
 import { useSelectRoomContextProvider } from '../contexts/select-room';
+
 type MessageProps = {
   item: any;
   index: number;
@@ -57,6 +58,7 @@ export function Chat() {
           onBlur={(e) => console.log("blur")}
           style={styles.input}
           placeholder='Conversar #💬  geral'
+          multiline
         />
         <Image source={require("../assets/figurines.svg")} style={styles.icon} />
         <Image source={require("../assets/gif.svg")} style={styles.icon} />
@@ -113,11 +115,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   inputContainer: {
-    maxHeight: 41,
-    flex: 1,
+    maxHeight: 240,
     flexDirection: "row",
+    paddingVertical: 7,
     backgroundColor: "#383a40",
-    alignItems: "center",
+    justifyContent: "center",
+    alignItems: "flex-end",
     borderRadius: 7,
     paddingLeft: 12,
   },

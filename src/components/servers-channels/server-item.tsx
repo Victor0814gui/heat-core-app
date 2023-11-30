@@ -1,27 +1,49 @@
 
 
 
-import React, { memo } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { memo, useState } from 'react';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { COLORS, FONTS } from '../../theme';
 import { useSelectRoomContextProvider } from '../../contexts/select-room';
 import ChangeSvg from "../../assets/channel.svg"
+import { GestureResponderEvent } from 'react-native';
+import { Modal } from '../modal';
 
 type ServerItemProps = {
   item: any;
   index: number;
 }
 
+type OnTouchStartProps = GestureResponderEvent;
 
 export const ServerItem = memo(({ item, index }: ServerItemProps) => {
+  const [textChange, setTextChange] = useState(false)
   const { setId } = useSelectRoomContextProvider();
 
+  const onTouchStart = (props: OnTouchStartProps) => {
+
+    console.log(props.nativeEvent);
+
+    //@ts-ignore
+    if (props.nativeEvent?.isRightButton) {
+      setTextChange(true)
+    }
+    //@ts-ignore
+
+    if (props.nativeEvent?.isLeftButton) {
+      setTextChange(false)
+    }
+  }
+
   return (
-    <TouchableOpacity onPress={() => setId(index < 2 ? index : 0)} key={index} style={styles.channelContent}>
-      <View style={styles.channelsItemDot} />
-      <Image style={styles.channelContentIcon} source={ChangeSvg} />
-      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.channelContentText}>{item}</Text>
-    </TouchableOpacity>
+    <>
+      {textChange && <Modal />}
+      <Pressable onTouchStart={onTouchStart} onPress={() => setId(index < 2 ? index : 0)} key={index} style={styles.channelContent}>
+        <View style={styles.channelsItemDot} />
+        <Image style={styles.channelContentIcon} source={ChangeSvg} />
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.channelContentText}>{textChange ? item + "mouse right" : item}</Text>
+      </Pressable>
+    </>
   )
 })
 

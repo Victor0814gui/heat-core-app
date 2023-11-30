@@ -8,7 +8,7 @@
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{13cb5623-5a27-43b5-8b66-57a5148f93fb}</ProjectGuid>
-    <ProjectName>heatCoreApp</ProjectName>
+    <ProjectName>discordclone</ProjectName>
     <RootNamespace>heatCoreApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>

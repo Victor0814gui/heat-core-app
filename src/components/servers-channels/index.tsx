@@ -89,7 +89,6 @@ export function ServersChannels({ id }: { id: number }) {
             </View>
           </ButtonWrapper>
         </View>
-
         <ButtonWrapper>
           <Image source={MicrophoneIconSvg} style={styles.icon} />
         </ButtonWrapper>

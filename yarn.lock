@@ -6789,6 +6789,12 @@ react-native-codegen@^0.70.4, react-native-codegen@^0.70.6:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-document-picker@Victor0814gui/react-native-document-picker#windows_cpp:
+  version "9.0.1"
+  resolved "https://codeload.github.com/Victor0814gui/react-native-document-picker/tar.gz/cad22d68fcfd649a13d3bb58d9380be53e3e55a2"
+  dependencies:
+    invariant "^2.2.4"
+
 react-native-gesture-handler@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz#ef9857871c10663c95a51546225b6e00cd4740cf"
