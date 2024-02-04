@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { COLORS } from '../theme';
+import React, {useEffect} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {COLORS} from '../theme';
 
 import AnimatedLottieView from 'lottie-react-native';
-import { ANIMATIONS } from '../utils';
+import {ANIMATIONS} from '../utils';
+import {screensName} from '../routes';
 
-export function SplashScreen({ navigation }: any) {
-
+export function SplashAnimationScreen({navigation}: any) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("Home", { itemId: 0 })
-    }, 2500)
+      navigation.navigate(screensName.homeChannelsScreen, {itemId: 0});
+    }, 2500);
 
     return () => clearTimeout(timer);
-  }, [])
+  }, []);
   return (
     <View style={styles.container}>
       <AnimatedLottieView
         source={ANIMATIONS.Splash}
-        autoPlay
+        autoPlay={true}
         loop={false}
-        resizeMode='contain'
+        resizeMode="contain"
         style={styles.animation}
       />
     </View>
@@ -30,14 +30,13 @@ export function SplashScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.grey_210,
-
   },
   animation: {
     height: 220,
     width: 220,
-  }
-})
+  },
+});

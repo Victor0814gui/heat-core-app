@@ -1,51 +1,44 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Navbar } from "../components/navbar";
-import { SplashScreen } from "../screens/splash-screen";
-import { COLORS } from "../theme";
-import { NavigationContainer } from "@react-navigation/native";
-import { DashboardScreen } from "../screens/dashboard";
-import { HomeScreen } from "../screens/home-screen";
-import { PrivateConversationsScreen } from "../screens/private-conversations-screen";
-import { DefaultTheme } from "@react-navigation/native";
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Navbar} from '../components/navbar';
+import {NavigationContainer} from '@react-navigation/native';
 
+import {SplashAnimationScreen} from '../screens/SplashAnimationScreen';
+import {HomeChannelsScreen} from '../screens/HomeChannelsScreen';
+import {PrivateChannelScreen} from '../screens/PrivateChannelScreen';
 
-const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: COLORS.grey_210,
-  },
-};
+import {navigationScreenOptions} from '../configs/NavigationScreenOptions';
+import {navigationContainerTheme} from '../configs/NavigationContainerTheme';
 
 const Drawer = createDrawerNavigator();
 
+export const screensName = {
+  splashAnimationScreen: 'SplashAnimationScreen',
+  homeChannelsScreen: 'HomeChannelsScreen',
+  privateChannelScreen: 'PrivateChannelScreen',
+};
 
 export function Routes() {
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={navigationContainerTheme}>
       <Drawer.Navigator
         useLegacyImplementation
-        drawerContent={(props) => <Navbar {...props} />}
-        screenOptions={{
-          headerShown: false,
-          drawerType: "permanent",
-          drawerStyle: {
-            width: 70,
-            backgroundColor: COLORS.grey_210,
-          },
-        }}
-      >
+        drawerContent={props => <Navbar {...props} />}
+        screenOptions={{...navigationScreenOptions}}>
         <Drawer.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{
-            drawerType: "slide"
-          }}
+          initialParams={{itemId: 0}}
+          options={{drawerType: 'back'}}
+          name={screensName.splashAnimationScreen}
+          component={SplashAnimationScreen}
         />
-        <Drawer.Screen initialParams={{ itemId: 0 }} name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-        <Drawer.Screen name="PrivateConversations" component={PrivateConversationsScreen} />
+        <Drawer.Screen
+          name={screensName.homeChannelsScreen}
+          component={HomeChannelsScreen}
+        />
+        <Drawer.Screen
+          name={screensName.privateChannelScreen}
+          component={PrivateChannelScreen}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
-  )
+  );
 }

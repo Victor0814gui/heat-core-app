@@ -40,10 +40,7 @@ App::App() noexcept
 #endif
 
     RegisterAutolinkedNativeModulePackages(PackageProviders()); // Includes any autolinked modules
-    
-    // IReactPackageProviders from lottie-react-native
     PackageProviders().Append(winrt::LottieReactNative::ReactPackageProvider(winrt::AnimatedVisuals::LottieCodegenSourceProvider()));
-
     PackageProviders().Append(make<ReactPackageProvider>()); // Includes all modules in this project
 
     InitializeComponent();

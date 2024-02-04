@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="c3764074-f5f8-46d9-a797-f7a40430cd1b"
+    Name="66423881-a245-4f75-b7a0-da12a1fa67f8"
     Publisher="CN=agcoi"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="c3764074-f5f8-46d9-a797-f7a40430cd1b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="66423881-a245-4f75-b7a0-da12a1fa67f8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>heatCoreApp</DisplayName>
@@ -37,9 +37,9 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="heatCoreApp"
-        BackgroundColor="#313338">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="discord clone" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#313338"/>
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>

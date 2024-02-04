@@ -1,55 +1,50 @@
+import React, {useCallback, useRef, useState} from 'react';
+import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
+import {COLORS, FONTS} from '../../theme';
 
+import SettingIconSvg from '../../assets/settings.svg';
+import MicrophoneIconSvg from '../../assets/microphone.svg';
+import HeadphoneIconSvg from '../../assets/headphone.svg';
+import ArrowSvg from '../../assets/arrow.svg';
 
-
-import React, { ReactNode, memo, useRef, useState } from 'react';
-import { View, Text, Image, PressableProps, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../theme';
-import { Pressable, useWindowDimensions } from 'react-native-windows';
-import { salasDoDiscord } from '../navbar';
-import { useSelectRoomContextProvider } from '../../contexts/select-room';
-
-import SettingIconSvg from "../../assets/settings.svg"
-import MicrophoneIconSvg from "../../assets/microphone.svg"
-import HeadphoneIconSvg from "../../assets/headphone.svg"
-import ArrowSvg from "../../assets/arrow.svg"
-
-import { ProfileModal } from '../profile';
-import { ServerItem } from './server-item';
-import { ListHeaderComponent } from './server-list-header';
-import { ButtonWrapper } from './button-wrapper';
+import {ProfileModal} from '../profile';
+import {Item} from './components/item';
+import {Header} from './components/header';
+import {ButtonWrapper} from './components/button-wrapper';
+import {channels} from '../../mocks/messages';
 
 type ServerItemProps = {
   item: any;
   index: number;
-}
+};
 
-export function ServersChannels({ id }: { id: number }) {
-  const [isScrolled, setIsScrolled] = useState(true)
-  const [isOpen, setIsOpen] = useState(true)
+export function ServersChannels({id}: {id: number}) {
+  const [isScrolled, setIsScrolled] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   const scrollRef = useRef<FlatList>(null);
   const modalRef = useRef(null);
 
-  const roomData = salasDoDiscord[id];
+  const roomData = channels[id];
 
   const onScroll = (e: number) => {
     setIsScrolled(e > 120);
-  }
+  };
 
-  const renderItemServer = (props: ServerItemProps) => <ServerItem {...props} />
+  const renderItemServer = (props: ServerItemProps) => <Item {...props} />;
 
-  const renderItem = () => (
-    <View style={styles.channelsItem}>
-      <View style={styles.channelsItemHeader}>
-        <Text style={styles.channelsItemText}>╭──[🚀] NEXT LEVEL WEEK</Text>
+  const renderItem = useCallback(
+    () => (
+      <View style={styles.channelsItem}>
+        <View style={styles.channelsItemHeader}>
+          <Text style={styles.channelsItemText}>╭──[🚀] NEXT LEVEL WEEK</Text>
+        </View>
+        <View style={styles.channelsItemContent}>
+          <FlatList data={roomData.salas} renderItem={renderItemServer} />
+        </View>
       </View>
-      <View style={styles.channelsItemContent}>
-        <FlatList
-          data={roomData.salas}
-          renderItem={renderItemServer}
-        />
-      </View>
-    </View>
-  )
+    ),
+    [],
+  );
 
   return (
     <View style={styles.container}>
@@ -57,34 +52,40 @@ export function ServersChannels({ id }: { id: number }) {
         isOpen={isOpen}
         //@ts-ignore
         target={modalRef.current}
+        showMode="transient-with-dismiss-on-pointer-move-away"
         onDismiss={() => {
           setIsOpen(false);
-          console.log("onDimiss")
+          console.log('onDimiss');
         }}
       />
-      <View style={[
-        styles.headerTop,
-        isScrolled && { backgroundColor: COLORS.grey_180, },
-      ]}>
+      <View
+        style={[
+          styles.headerTop,
+          isScrolled && {backgroundColor: COLORS.grey_180},
+        ]}>
         <Text style={styles.headerText}>{roomData.nome}</Text>
-        <Image source={ArrowSvg} />
+        <Image source={ArrowSvg} style={{borderTopLeftRadius: 12}} />
       </View>
       <FlatList
-        onScroll={(e) => onScroll(e.nativeEvent.contentOffset.y)}
+        onScroll={e => onScroll(e.nativeEvent.contentOffset.y)}
         ref={scrollRef}
-        data={new Array(3).fill({ e: 1 })}
-        ListHeaderComponent={ListHeaderComponent}
+        data={new Array(3).fill({e: 1})}
+        ListHeaderComponent={Header}
         renderItem={renderItem}
       />
       <View style={styles.footer}>
-        <View ref={modalRef} style={{ marginRight: "auto" }}>
+        <View ref={modalRef} style={{marginRight: 'auto'}}>
           <ButtonWrapper onPress={() => setIsOpen(true)}>
             <Image
               style={styles.imageAvatar}
-              source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
+              source={{
+                uri: 'https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png',
+              }}
             />
-            <View style={{ marginLeft: 7, paddingRight: 12, }}>
-              <Text numberOfLines={1} style={styles.name}>Guilherme</Text>
+            <View style={{marginLeft: 7, paddingRight: 12}}>
+              <Text numberOfLines={1} style={styles.name}>
+                Guilherme
+              </Text>
               <Text style={styles.nickname}>Disponivel</Text>
             </View>
           </ButtonWrapper>
@@ -107,13 +108,16 @@ const channelsItemDotSize = 10;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    maxWidth: 270,
-    minWidth: 200,
+    // flex: 1,
+    height: '100%',
+    width: 270,
     backgroundColor: COLORS.grey_180,
+    zIndex: 999,
+    elevation: 100,
+    position: 'relative',
   },
   headerTop: {
-    position: "absolute",
+    position: 'absolute',
     padding: 12,
     height: 51,
     top: 0,
@@ -124,15 +128,16 @@ const styles = StyleSheet.create({
   headerText: {
     color: COLORS.white,
     fontSize: 16,
-    fontFamily: FONTS.Roboto.Bold,
+    fontWeight: '600',
   },
   channelsItem: {
     marginVertical: 4,
   },
+  activeNowContainer: {},
   channelsItemHeader: {
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
   },
   channelsItemDot: {
     height: channelsItemDotSize,
@@ -146,26 +151,26 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginVertical: 7,
     fontSize: 12,
-    fontFamily: FONTS.Roboto.Medium,
+    fontWeight: '600',
   },
   channelsItemContent: {
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   channelContent: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingVertical: 4,
-    alignItems: "center",
+    alignItems: 'center',
   },
   channelContentIcon: {
-    marginRight: 7
+    marginRight: 7,
   },
   channelContentText: {
     fontSize: 14,
-    fontFamily: FONTS.Roboto.Regular,
+    fontWeight: '600',
   },
   footer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 4,
     paddingHorizontal: 7,
   },
@@ -176,15 +181,16 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 14,
-    fontFamily: FONTS.Poppins.Medium,
+    fontWeight: '600',
   },
   nickname: {
     fontSize: 12,
-    fontFamily: FONTS.Poppins.Medium,
-    color: "#b9b9b9"
+    fontWeight: '600',
+
+    color: '#b9b9b9',
   },
   icon: {
     height: 22,
     width: 22,
   },
-})
+});

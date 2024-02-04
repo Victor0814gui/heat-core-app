@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, Image, Text, FlatList, StyleSheet } from 'react-native';
-import { COLORS } from '../theme';
+import {View, Image, Text, FlatList, StyleSheet} from 'react-native';
+import {COLORS} from '../../../theme';
 
-
-export function PeoplesProfile() {
+export function Peoples() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={new Array(30).fill({ e: 1 })}
-        renderItem={({ item, index }) => (
+        data={new Array(30).fill({e: 1})}
+        renderItem={({item, index}) => (
           <View key={index} style={styles.messageContainer}>
             <Image
               style={styles.imageAvatar}
-              source={{ uri: "https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png" }}
+              source={{
+                uri: 'https://discord.com/assets/3c6ccb83716d1e4fb91d3082f6b21d77.png',
+              }}
             />
             <Text style={styles.messageContentNickname}>Vitin</Text>
           </View>
@@ -31,8 +32,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.grey_180,
   },
   messageContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 21,
     marginVertical: 3,
   },
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   messageContentNickname: {},
-})
+});
