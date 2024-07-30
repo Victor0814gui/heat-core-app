@@ -2,7 +2,6 @@
 #include "ReactPackageProvider.h"
 #include "NativeModules.h"
 
-
 #include "CursosPointer.h"
 
 using namespace winrt::Microsoft::ReactNative;

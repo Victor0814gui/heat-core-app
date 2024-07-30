@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="66423881-a245-4f75-b7a0-da12a1fa67f8"
+    Name="e88515c7-d30c-449e-8560-8050e84e0220"
     Publisher="CN=agcoi"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="66423881-a245-4f75-b7a0-da12a1fa67f8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="e88515c7-d30c-449e-8560-8050e84e0220" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>heatCoreApp</DisplayName>

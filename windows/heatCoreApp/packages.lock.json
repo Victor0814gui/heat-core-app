@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "dependencies": {
+    "native,Version=v0.0": {
+      "LottieGen.MsBuild": {
+        "type": "Direct",
+        "requested": "[7.1.0, 7.1.0]",
+        "resolved": "7.1.0",
+        "contentHash": "4HTqFPid5+EKg1SgyTTddo1JvXi/mS127Q8kSo4IPv9nx+2iwaEDkAK47Dx2ivuwpyw7Fe6PC7e1EdZDL9AjbQ=="
+      },
+      "Microsoft.UI.Xaml": {
+        "type": "Direct",
+        "requested": "[2.8.0, 2.8.0]",
+        "resolved": "2.8.0",
+        "contentHash": "vxdHxTr63s5KVtNddMFpgvjBjUH50z7seq/5jLWmmSuf8poxg+sXrywkofUdE8ZstbpO9y3FL/IXXUcPYbeesA=="
+      },
+      "Microsoft.Web.WebView2": {
+        "type": "Direct",
+        "requested": "[1.0.1264.42, 1.0.1264.42]",
+        "resolved": "1.0.1264.42",
+        "contentHash": "7OBUTkzQ5VI/3gb0ufi5U4zjuCowAJwQg2li0zXXzqkM+S1kmOlivTy1R4jAW+gY5Vyg510M+qMAESCQUjrfgA=="
+      }
+    }
+  }
+}
