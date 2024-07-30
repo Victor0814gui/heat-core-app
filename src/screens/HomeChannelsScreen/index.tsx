@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import {COLORS} from '../../theme';
 
 import {Header} from '../../components/header';
-import {ServersChannels} from '../../components/servers-channels';
 import {Peoples} from './components/Peoples';
 import {Chat} from './components/Chat';
 
@@ -15,7 +14,7 @@ export function HomeChannelsScreen({route}: any) {
         <Header id={id} />
         <View style={{flexDirection: 'row', flex: 1}}>
           <Chat />
-          {/* <Peoples /> */}
+          <Peoples />
         </View>
       </View>
     </View>

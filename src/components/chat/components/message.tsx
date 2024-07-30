@@ -23,7 +23,7 @@ export const Message = memo(({item, index}: MessageProps) => (
         <Text style={styles.hourText}>Hoje às 8:40</Text>
       </View>
       <Text selectable style={styles.messageContentText}>
-        {item.content}
+        asjdflkjashdflkjahsdf
       </Text>
     </View>
   </View>
@@ -52,18 +52,19 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   messageContentNickname: {
-    fontFamily: 'GGSansBold.woff#gg sans',
+    fontFamily: FONTS.Roboto.Medium,
     fontSize: 16,
     color: '#f2f2f2',
   },
   hourText: {
+    fontFamily: FONTS.Roboto.Medium,
     fontSize: 12,
     color: '#7f8584',
   },
   messageContentText: {
+    fontFamily: FONTS.Roboto.Medium,
     fontSize: 16,
     color: '#b5b7b9',
-    fontWeight: '500',
     marginTop: 4,
   },
   inputContainer: {

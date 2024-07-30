@@ -20,6 +20,8 @@ export function Chat() {
           data={messages}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
+          initialNumToRender={21}
+          maxToRenderPerBatch={10}
         />
       </View>
       <View style={styles.inputContainer}>

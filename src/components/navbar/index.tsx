@@ -2,10 +2,10 @@ import React, {useRef} from 'react';
 import {View, FlatList, StyleSheet, Text} from 'react-native';
 import {COLORS} from '../../theme';
 import {Circle} from './components/circle';
-import {channels} from '../../mocks/messages';
 import {screensName} from '../../routes';
 import {ServersChannels} from '../servers-channels';
 import {channel} from '../../mocks/chennals';
+import {serverItemSize} from './components/circle.constants';
 
 export function Navbar({navigation, ...rest}: any) {
   const renderItem = ({item, index}: any) => (
@@ -32,6 +32,13 @@ export function Navbar({navigation, ...rest}: any) {
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
           contentContainerStyle={styles.list}
+          initialNumToRender={14}
+          maxToRenderPerBatch={10}
+          getItemLayout={(data, index) => ({
+            length: serverItemSize,
+            offset: serverItemSize * index,
+            index,
+          })}
         />
       </View>
       <ServersChannels id={0} />

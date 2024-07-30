@@ -7,5 +7,6 @@ export const navigationContainerTheme: Theme = {
     ...DefaultTheme.colors,
     text: '#7A7E87',
     background: COLORS.grey_210,
+    border: COLORS.grey_210,
   },
 };

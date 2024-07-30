@@ -23,7 +23,9 @@ export function Routes() {
       <Drawer.Navigator
         useLegacyImplementation
         drawerContent={props => <Navbar {...props} />}
-        screenOptions={{...navigationScreenOptions}}>
+        screenOptions={{
+          ...navigationScreenOptions,
+        }}>
         <Drawer.Screen
           initialParams={{itemId: 0}}
           options={{drawerType: 'back'}}

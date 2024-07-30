@@ -1,8 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React, {memo, useRef, useState} from 'react';
 import {View, Animated, StyleSheet, Text, PressableProps} from 'react-native';
 import {Flyout, Pressable} from 'react-native-windows';
-import {COLORS} from '../../../theme';
 import {cursorPointer} from '../../../native/CursorPointer';
+
+import {styles} from './circle.style';
 
 type CircleProps = PressableProps & {
   questions?: number;
@@ -10,9 +11,14 @@ type CircleProps = PressableProps & {
   thumbnailUrl?: string;
 };
 
-export function Circle({name, questions, thumbnailUrl, ...rest}: CircleProps) {
+function CircleComponent({
+  name,
+  questions,
+  thumbnailUrl,
+  ...rest
+}: CircleProps) {
   const buttonRef = useRef(null);
-  const anim = useRef(new Animated.Value(40)).current;
+  const anim = useRef(new Animated.Value(30)).current;
   const pressedAnim = useRef(new Animated.Value(0)).current;
 
   const [shotFlyout, setShotFlyout] = useState(false);
@@ -23,7 +29,7 @@ export function Circle({name, questions, thumbnailUrl, ...rest}: CircleProps) {
     if (!!shotFlyout) {
     }
     await cursorPointer.cursor('hand');
-    Animated.timing(anim, {
+    await Animated.timing(anim, {
       useNativeDriver: false,
       duration: 300,
       toValue: 10,
@@ -39,7 +45,7 @@ export function Circle({name, questions, thumbnailUrl, ...rest}: CircleProps) {
     Animated.timing(anim, {
       useNativeDriver: false,
       duration: 300,
-      toValue: 40,
+      toValue: 30,
     }).start();
   };
 
@@ -145,43 +151,4 @@ export function Circle({name, questions, thumbnailUrl, ...rest}: CircleProps) {
   );
 }
 
-const channelsItemDotSize = 9;
-const serverItemSize = 50;
-const styles = StyleSheet.create({
-  list: {
-    alignItems: 'center',
-  },
-  serverItem: {
-    height: serverItemSize,
-    width: serverItemSize,
-    borderRadius: serverItemSize / 2,
-    backgroundColor: COLORS.grey_300,
-    alignSelf: 'center',
-    marginVertical: 4,
-  },
-  channelsItemDot: {
-    height: channelsItemDotSize,
-    width: channelsItemDotSize / 2,
-    borderTopEndRadius: channelsItemDotSize / 2,
-    borderBottomEndRadius: channelsItemDotSize / 2,
-    backgroundColor: COLORS.white,
-    marginRight: 12,
-    top: 23,
-    left: 0,
-    position: 'absolute',
-  },
-  badge: {
-    paddingHorizontal: 3,
-    borderRadius: 9,
-    backgroundColor: '#F23F42',
-    borderWidth: 4,
-    borderColor: '#1E1F22',
-    position: 'absolute',
-    bottom: -3,
-    right: 10,
-  },
-  badgeText: {
-    fontSize: 12,
-    fontWeight: '800',
-  },
-});
+export const Circle = memo(CircleComponent);

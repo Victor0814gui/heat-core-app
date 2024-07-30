@@ -12,6 +12,7 @@ import {Item} from './components/item';
 import {Header} from './components/header';
 import {ButtonWrapper} from './components/button-wrapper';
 import {channels} from '../../mocks/messages';
+import {ChannelsItem} from './components/channels-item';
 
 type ServerItemProps = {
   item: any;
@@ -30,21 +31,7 @@ export function ServersChannels({id}: {id: number}) {
     setIsScrolled(e > 120);
   };
 
-  const renderItemServer = (props: ServerItemProps) => <Item {...props} />;
-
-  const renderItem = useCallback(
-    () => (
-      <View style={styles.channelsItem}>
-        <View style={styles.channelsItemHeader}>
-          <Text style={styles.channelsItemText}>╭──[🚀] NEXT LEVEL WEEK</Text>
-        </View>
-        <View style={styles.channelsItemContent}>
-          <FlatList data={roomData.salas} renderItem={renderItemServer} />
-        </View>
-      </View>
-    ),
-    [],
-  );
+  const renderItem = useCallback(() => <ChannelsItem id={id} />, [id]);
 
   return (
     <View style={styles.container}>
@@ -67,8 +54,9 @@ export function ServersChannels({id}: {id: number}) {
         <Image source={ArrowSvg} style={{borderTopLeftRadius: 12}} />
       </View>
       <FlatList
-        onScroll={e => onScroll(e.nativeEvent.contentOffset.y)}
         ref={scrollRef}
+        onScroll={e => onScroll(e.nativeEvent.contentOffset.y)}
+        showsVerticalScrollIndicator={false}
         data={new Array(3).fill({e: 1})}
         ListHeaderComponent={Header}
         renderItem={renderItem}

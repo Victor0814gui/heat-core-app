@@ -1,10 +1,8 @@
-import React, {memo, useState} from 'react';
-import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import React, {memo, useRef, useState} from 'react';
+import {View, Text, Image, StyleSheet, Animated, Pressable} from 'react-native';
 import {COLORS, FONTS} from '../../../theme';
-import {useSelectRoomContextProvider} from '../../../contexts/select-room';
 import ChangeSvg from '../../../assets/channel.svg';
 import {GestureResponderEvent} from 'react-native';
-import {Modal} from '../../modal';
 import {cursorPointer} from '../../../native/CursorPointer';
 
 type ServerItemProps = {
@@ -16,24 +14,31 @@ type OnTouchStartProps = GestureResponderEvent;
 
 export const Item = memo(({item, index}: ServerItemProps) => {
   const [textChange, setTextChange] = useState(false);
-  const {setId} = useSelectRoomContextProvider();
 
+  // const {setId} = useSelectRoomContextProvider();
+  const animation = useRef(new Animated.Value(0)).current;
   const [onHover, setOnHover] = useState(false);
 
   const onHoverIn = async () => {
-    console.log('onHoverIn');
+    await Animated.timing(animation, {
+      useNativeDriver: false,
+      duration: 100,
+      toValue: 1,
+    }).start();
     await cursorPointer.cursor('hand');
-    setOnHover(true);
   };
 
   const onHoverOut = async () => {
+    await Animated.timing(animation, {
+      useNativeDriver: false,
+      duration: 50,
+      toValue: 0,
+    }).start();
     await cursorPointer.cursor('arrow');
-    setOnHover(false);
   };
 
   const onTouchStart = (props: OnTouchStartProps) => {
     console.log(props.nativeEvent);
-
     //@ts-ignore
     if (props.nativeEvent?.isRightButton) {
       setTextChange(true);
@@ -45,6 +50,24 @@ export const Item = memo(({item, index}: ServerItemProps) => {
     }
   };
 
+  const onPressIn = async () => {
+    Animated.timing(animation, {
+      useNativeDriver: false,
+      duration: 100,
+      toValue: 2,
+    }).start();
+    await cursorPointer.cursor('arrow');
+  };
+
+  const onPressOut = async () => {
+    Animated.timing(animation, {
+      useNativeDriver: false,
+      duration: 100,
+      toValue: 1,
+    }).start();
+    await cursorPointer.cursor('hand');
+  };
+
   return (
     <View style={[styles.channelContent]}>
       <View style={styles.channelsItemDot} />
@@ -52,21 +75,32 @@ export const Item = memo(({item, index}: ServerItemProps) => {
         onHoverIn={onHoverIn}
         onHoverOut={onHoverOut}
         onTouchStart={onTouchStart}
-        onPress={() => setId(index < 2 ? index : 0)}
-        key={index}
-        style={[
-          styles.content,
-          {
-            backgroundColor: onHover ? '#35373C' : '#2B2D31',
-          },
-        ]}>
-        <Image style={styles.channelContentIcon} source={ChangeSvg} />
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.channelContentText}>
-          {textChange ? item + 'mouse right' : item}
-        </Text>
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={{
+          alignSelf: 'stretch',
+          width: '100%',
+        }}
+        // onPress={() => setId(index < 2 ? index : 0)}
+      >
+        <Animated.View
+          style={[
+            styles.content,
+            {
+              backgroundColor: animation.interpolate({
+                inputRange: [0, 1, 2],
+                outputRange: [COLORS.grey_180, '#35373C', COLORS.grey_210],
+              }),
+            },
+          ]}>
+          <Image style={styles.channelContentIcon} source={ChangeSvg} />
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.channelContentText}>
+            {textChange ? item + 'mouse right' : item}
+          </Text>
+        </Animated.View>
       </Pressable>
     </View>
   );
@@ -85,6 +119,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    alignSelf: 'stretch',
     marginRight: 21,
     paddingVertical: 4,
     paddingLeft: 7,
